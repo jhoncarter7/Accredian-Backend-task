@@ -21,7 +21,7 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-// Create a new referral
+
 app.post('/api/referrals', async (req, res) => {
   try {
     const { referrerName, referrerEmail, recipientName, recipientEmail } = req.body;
@@ -31,7 +31,8 @@ app.post('/api/referrals', async (req, res) => {
         referrerName,
         referrerEmail,
         recipientName,
-        recipientEmail
+        recipientEmail,
+        referralCourse
       }
     });
 
@@ -44,6 +45,7 @@ app.post('/api/referrals', async (req, res) => {
         <h1>You've been referred!</h1>
         <p>Hello ${recipientName},</p>
         <p>${referrerName} (${referrerEmail}) has referred you to our platform.</p>
+        <p>The course you are referred to is ${referralCourse}.</p>
         <p>We look forward to having you join us!</p>
       `
     };
@@ -56,7 +58,7 @@ app.post('/api/referrals', async (req, res) => {
     res.status(500).json({ error: 'Error creating referral' });
   }
 });
-// Get referrals by referrer email
+
 app.get('/api/referrals/:email', async (req, res) => {
   try {
     const { email } = req.params;

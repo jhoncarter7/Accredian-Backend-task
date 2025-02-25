@@ -18,5 +18,6 @@ model Referral {
   referrerEmail     String
   recipientName     String
   recipientEmail    String
+  referralCourse    String
   createdAt         DateTime @default(now())
 }
